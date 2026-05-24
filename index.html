@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Czarnogóra — Dobra Voda | 3–8 czerwca 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; color: #1a202c; }
+
+  .hero {
+    background: linear-gradient(135deg, #1a4a6e 0%, #0d7a5f 60%, #1a6e4e 100%);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2.4rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .hero .sub { font-size: 1.1rem; opacity: 0.85; margin-bottom: 24px; }
+  .hero .chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .chip {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .container { max-width: 980px; margin: 0 auto; padding: 32px 16px; }
+
+  .weather-bar {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .weather-bar h2 { font-size: 1rem; font-weight: 700; color: #4a5568; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+  .weather-days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .weather-day {
+    text-align: center;
+    padding: 12px 8px;
+    border-radius: 12px;
+    background: #f7fafc;
+    border: 2px solid transparent;
+  }
+  .weather-day.sunny { background: #fffbeb; border-color: #f6ad55; }
+  .weather-day.cloudy { background: #ebf8ff; border-color: #90cdf4; }
+  .weather-day.rainy { background: #e8f5ff; border-color: #bee3f8; }
+  .weather-day .date { font-size: 0.7rem; color: #718096; font-weight: 600; text-transform: uppercase; }
+  .weather-day .icon { font-size: 1.8rem; margin: 4px 0; }
+  .weather-day .temp { font-size: 1rem; font-weight: 800; color: #2d3748; }
+  .weather-day .rain { font-size: 0.72rem; color: #718096; margin-top: 2px; }
+  .weather-day .sunset { font-size: 0.68rem; color: #e07b39; margin-top: 4px; font-weight: 600; }
+
+  .section { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid #f0f4f8;
+  }
+  .day-badge {
+    background: linear-gradient(135deg, #2b6cb0, #2c7a7b);
+    color: white;
+    border-radius: 10px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .day-badge.rain { background: linear-gradient(135deg, #5a8fa3, #4a7a8a); }
+  .day-badge.sun { background: linear-gradient(135deg, #c05621, #dd6b20); }
+  .day-badge.hot { background: linear-gradient(135deg, #c53030, #e53e3e); }
+  .section-title { font-size: 1.25rem; font-weight: 800; color: #1a202c; }
+  .section-subtitle { font-size: 0.85rem; color: #718096; margin-top: 2px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #f7fafc; text-align: left; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 10px 12px; border-bottom: 1px solid #edf2f7; font-size: 0.88rem; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #f7fafc; }
+
+  .time { color: #718096; font-weight: 600; white-space: nowrap; font-size: 0.82rem; }
+  .activity { font-weight: 600; color: #2d3748; }
+  .activity small { font-weight: 400; color: #718096; display: block; margin-top: 2px; font-size: 0.8rem; }
+  .star { color: #d69e2e; font-weight: 700; }
+  .reviews { color: #718096; font-size: 0.78rem; }
+
+  a { color: #2b6cb0; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .map-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #ebf8ff;
+    color: #2b6cb0;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .img-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #faf5ff;
+    color: #6b46c1;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: 4px;
+  }
+  .menu-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f0fff4;
+    color: #276749;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+
+  .tip-box {
+    background: #fffbeb;
+    border-left: 4px solid #f6ad55;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.85rem;
+    color: #744210;
+  }
+  .warn-box {
+    background: #fff5f5;
+    border-left: 4px solid #fc8181;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.85rem;
+    color: #742a2a;
+  }
+  .info-box {
+    background: #ebf8ff;
+    border-left: 4px solid #63b3ed;
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.85rem;
+    color: #2c5282;
+  }
+
+  .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 640px) { .two-cols { grid-template-columns: 1fr; } .weather-days { grid-template-columns: repeat(3, 1fr); } }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-top: 16px; }
+  .card {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: #90cdf4; }
+  .card .name { font-weight: 700; font-size: 0.95rem; color: #2d3748; margin-bottom: 4px; }
+  .card .meta { font-size: 0.78rem; color: #718096; margin-bottom: 8px; }
+  .card .links { display: flex; flex-wrap: wrap; gap: 4px; }
+
+  .sunset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+  .sunset-card {
+    border: 2px solid #fed7aa;
+    border-radius: 12px;
+    padding: 14px;
+    background: linear-gradient(135deg, #fffbeb, #fff7ed);
+  }
+  .sunset-card .name { font-weight: 700; font-size: 0.9rem; color: #744210; }
+  .sunset-card .desc { font-size: 0.8rem; color: #92400e; margin: 4px 0 8px; line-height: 1.4; }
+
+  .beach-table tr.top td { background: #f0fff4; }
+
+  .budget-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+  .budget-item {
+    background: #f7fafc;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .budget-item .label { font-size: 0.75rem; color: #718096; font-weight: 600; text-transform: uppercase; margin-bottom: 6px; }
+  .budget-item .amount { font-size: 1.3rem; font-weight: 800; color: #2d3748; }
+
+  .practical-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .practical-item { background: #f7fafc; border-radius: 10px; padding: 14px; }
+  .practical-item h4 { font-size: 0.8rem; font-weight: 700; color: #4a5568; text-transform: uppercase; margin-bottom: 6px; }
+  .practical-item p { font-size: 0.83rem; color: #4a5568; line-height: 1.5; }
+
+  .route-table td:nth-child(3) { font-weight: 700; color: #2d3748; }
+
+  h3.subsection { font-size: 0.9rem; font-weight: 700; color: #4a5568; text-transform: uppercase; letter-spacing: 0.5px; margin: 20px 0 10px; border-bottom: 1px solid #e2e8f0; padding-bottom: 6px; }
+
+  .important-list { list-style: none; }
+  .important-list li { padding: 8px 0; border-bottom: 1px solid #f0f4f8; font-size: 0.87rem; color: #4a5568; }
+  .important-list li::before { content: "⚠️ "; }
+  .important-list li:last-child { border-bottom: none; }
+
+  .day-stats {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    background: #edf2f7; border-radius: 10px; padding: 10px 16px;
+    margin-bottom: 8px; font-size: 0.82rem; color: #4a5568;
+    border-left: 3px solid #a0aec0;
+  }
+  .day-stats span { display: flex; align-items: center; gap: 4px; font-weight: 600; }
+
+  .packing-box {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px;
+    padding: 10px 16px; margin-bottom: 12px; font-size: 0.82rem; color: #78350f;
+    line-height: 1.6;
+  }
+  .packing-box strong { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: #92400e; }
+
+  table td.activity > .cat { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #718096; display: block; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🌊 Czarnogóra — Dobra Voda</h1>
+  <div class="sub">3–8 czerwca 2026 · Plan podróży</div>
+  <div class="chips">
+    <span class="chip">👨‍👩‍👧‍👦 4 osoby (dzieci 11 i 15 lat)</span>
+    <span class="chip">🚗 Własny samochód</span>
+    <span class="chip">🏨 Hotel ze śniadaniem</span>
+    <span class="chip">✈️ Podgorica TGD</span>
+    <span class="chip">📅 6 dni</span>
+    <span class="chip">🌡 22–29°C</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- POGODA -->
+<div class="weather-bar">
+  <h2>☀️ Pogoda — prognoza Open-Meteo (aktualizacja 24.05.2026)</h2>
+  <div class="weather-days">
+    <div class="weather-day cloudy">
+      <div class="date">Wt 3.06</div>
+      <div class="icon">⛅</div>
+      <div class="temp">23°C</div>
+      <div class="rain">0.6mm · 18%</div>
+      <div class="sunset">🌅 20:14</div>
+    </div>
+    <div class="weather-day rainy">
+      <div class="date">Śr 4.06</div>
+      <div class="icon">🌦</div>
+      <div class="temp">23°C</div>
+      <div class="rain">1.5mm · 20%</div>
+      <div class="sunset">🌅 20:14</div>
+    </div>
+    <div class="weather-day rainy">
+      <div class="date">Cz 5.06</div>
+      <div class="icon">🌦</div>
+      <div class="temp">24°C</div>
+      <div class="rain">1.5mm · 22%</div>
+      <div class="sunset">🌅 20:15</div>
+    </div>
+    <div class="weather-day sunny">
+      <div class="date">Pt 6.06</div>
+      <div class="icon">☀️</div>
+      <div class="temp">27°C</div>
+      <div class="rain">0mm</div>
+      <div class="sunset">🌅 20:16</div>
+    </div>
+    <div class="weather-day sunny" style="border-color:#e53e3e; background:#fff5f0;">
+      <div class="date">Sb 7.06</div>
+      <div class="icon">🔥</div>
+      <div class="temp" style="color:#c53030;">29°C</div>
+      <div class="rain">0mm</div>
+      <div class="sunset">🌅 20:16</div>
+    </div>
+    <div class="weather-day cloudy">
+      <div class="date">Nd 8.06</div>
+      <div class="icon">✈️</div>
+      <div class="temp">—</div>
+      <div class="rain">wylot 13:25</div>
+      <div class="sunset">🌅 20:17</div>
+    </div>
+  </div>
+  <div class="tip-box" style="margin-top:16px;">
+    💡 Środa–czwartek lekkie przeloty — idealne na zabytki (Stari Bar, Skadar). Piątek–sobota bezchmurne i gorące — najlepsze dni na plażę i Kotor.
+    Historyczna norma czerwcowa: 27°C / 1.1mm dziennie.
+  </div>
+</div>
+
+<!-- DZIEŃ 1 -->
+<div class="section">
+  <div class="section-header">
+    <span class="day-badge">Wtorek 3.06</span>
+    <div>
+      <div class="section-title">Przylot i aklimatyzacja</div>
+      <div class="section-subtitle">⛅ 23°C · Podgorica → Dobra Voda · Pierwsze plaże</div>
+    </div>
+  </div>
+  <div class="day-stats">
+    <span>🚗 65 km</span>
+    <span>⏱ 1h15 jazdy</span>
+    <span>🚶 ~1.5h pieszo</span>
+    <span>💰 ~35€ dla 4 osób (kolacja ~30€ + napoje)</span>
+    <span>🌡 23°C, pochmurno</span>
+  </div>
+  <div class="packing-box"><strong>🎒 Co zabrać rano:</strong> dokumenty podróżne · gotówka 30€ (jedzenie + woda) · krem UV · <strong>buty do wody</strong> (Small Cove — mokre skały!) · ręcznik plażowy · ładowarka do aparatu</div>
+  <table>
+    <tr><th>Godzina</th><th>Co</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="time">~13:00</td>
+      <td class="activity">Przylot — lotnisko Podgorica TGD<small>Odbiór bagażu, wyjazd własnym autem</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.3594,19.2519">📍 mapa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">~14:15</td>
+      <td class="activity">Dobra Voda — check-in hotel<small>Trasa: E65 przez Bar, ~65km, ~1h15min</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.035,19.133">📍 mapa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">15:00</td>
+      <td class="activity">Basen hotelowy + odpoczynek</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">16:30</td>
+      <td class="activity">🏖️ Mali Pijesak Beach — żwirowa plaża <span class="star">4.4★</span><small>2 min spacerem od hotelu. Łagodne wejście do morza.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0394,19.1435">📍 42.0394,19.1435</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Mali+Pijesak+Dobra+Voda">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">17:30</td>
+      <td class="activity">Small Cove &amp; Cave — naturalna zatoczka z jaskiniowym wejściem <span class="star">4.7★</span> 58 opinii<small>Ukryta zatoczka pieszo wzdłuż brzegu. 📷 <strong>Foto:</strong> Turkusowa woda między skałami — zdjęcie w wodzie lub na kamieniach. Tłumu prawie nie ma.</small>
+        <div class="info-box" style="margin:6px 0 0; padding:8px 12px; font-size:0.8rem;">🗺️ <strong>Jak dotrzeć:</strong> Parkuj przy plaży Mali Pijesak <a class="map-link" href="https://www.google.com/maps/place/42.0394,19.1435">GPS 42.0394,19.1435</a> → idź ścieżką skalną wzdłuż wody w kierunku północnym, ~10–15 min. Brak tablic — trzymaj się linii brzegowej. Buty do wody: skały mokre i śliskie.</div></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0423,19.1426">📍 42.0423,19.1426</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Small+Cove+Cave+Dobra+Voda+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">19:30</td>
+      <td class="activity">🍽️ Cevabdzinica Kolovic — grill, ćevapi <span class="star">4.8★</span> 457 opinii <a class="menu-link" href="https://eeur-cdn.speisekarte.menu/storage/media/companies_menu_pdf/88675121/cevabdzinica-kolovic-dobra-voda-speisekarte.pdf">🍽️ menu PDF</a><small>5 min autem. <strong>Ceny: Ćevapi 5–7€ · Pljeskavica 6–8€ · Rosół 3€ · Napoje 1–2€.</strong> Obiad dla 3 osób z napojami ok. 20€ (Reddit 2024). Klasyczna grillownia, porcje duże.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Cevabdzinica+Kolovic+Dobra+Voda/@42.0519,19.1414,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Cevabdzinica+Kolovic+Dobra+Voda">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">20:14</td>
+      <td class="activity">🌅 Zachód słońca — Veliki Pijesak lub Montana Tower<small>Montenegro Tower (42.0260, 19.1604) — bar z widokiem na wzgórzu, 2 min autem. Widok 360°.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0260,19.1604">📍 Montenegro Tower</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Dobra+Voda+Montenegro+sunset">🖼️</a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- DZIEŃ 2 -->
+<div class="section">
+  <div class="section-header">
+    <span class="day-badge rain">Środa 4.06</span>
+    <div>
+      <div class="section-title">Stari Bar — ruiny twierdzy + rynek</div>
+      <div class="section-subtitle">🌦 23°C · możliwy lekki przelot · Kultura i jedzenie</div>
+    </div>
+  </div>
+  <div class="day-stats">
+    <span>🚗 ~40 km</span>
+    <span>⏱ ~50min jazdy</span>
+    <span>🚶 ~4h pieszo</span>
+    <span>💰 ~160€ dla 4 osób (bilety ~20€ · obiad ~70€ · kolacja ~60€ · inne 10€)</span>
+    <span>🏛️ 1 twierdza · 🏖️ 1 plaża</span>
+    <span>🌡 23°C, możliwy przelot</span>
+  </div>
+  <div class="packing-box"><strong>🎒 Co zabrać rano:</strong> <strong>wygodne buty na twardą podeszwę</strong> (twierdza — nierówny teren, mokre kamienie po deszczu!) · gotówka 50€ (bilet 5€/os, jedzenie, lody) · krem UV + kapelusz · strój kąpielowy (plaża Sutomore po południu) · ręcznik</div>
+  <div class="info-box">ℹ️ 1.5mm i 20% szans na deszcz — lekki przelot. Stari Bar świetny nawet w deszczu — kryte przejścia, dużo historii do odkrycia.</div>
+  <table>
+    <tr><th>Godzina</th><th>Co</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="time">9:00</td>
+      <td class="activity">Dobra Voda → Stari Bar<small>8km, ~12 min. Parkuj przy bramie — max 2€.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Stari+Bar">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">9:30–12:00</td>
+      <td class="activity">🏛️ Twierdza Stari Bar <span class="star">4.7★</span> <span class="reviews">6 076 opinii</span><small>Ruiny osmańsko-bizantyjskiej twierdzy z XI w. 240 budynków, akwedukt, wieże. Bilet 5€/dorosły, dzieci taniej. Wejdź na mury — widok na morze. 📷 <strong>Foto:</strong> Stań w kamiennym łuku lub przejściu — naturalna rama do zdjęcia rodzinnego. Na murach: morze i góry w tle.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0941,19.1349">📍 42.0941,19.1349</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Stari+Bar+fortress+ruins+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">12:00–13:00</td>
+      <td class="activity">🍽️ Konoba Bedem — grill, ośmiornica, jagnięcina <span class="star">4.7★</span> <span class="reviews">2 135 opinii</span> <a class="menu-link" href="https://www.tripadvisor.com/Restaurant_Review-g3174379-d8087788-Reviews-Konoba_Bedem-Stari_Bar_Bar_Municipality.html">🍽️ menu</a><small>Tuż przy murach twierdzy. <strong>Ceny: Grillowana ośmiornica ~18€ · Jagnięcina z rożna ~15€ · Mix z grilla ~12€ · Zupa 4€.</strong> Dzieci: mix z grilla (mięso) lub kiełbasa — klasyka bałkańska, żadnych problemów. Ceny wyższe niż przeciętnie w CG — lokalizacja i jakość to uzasadniają (TripAdvisor IX 2024). Rezerwacja polecana.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Konoba+Bedem+Stari+Bar/@42.0937,19.1339,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Bedem+Stari+Bar">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">13:30</td>
+      <td class="activity">🌳 Stara Maslina — najstarsza oliwka na świecie (2000–2500 lat)<small>Bilet 1€. Koło Stari Bar, 5 min. Zdjęcie obowiązkowe.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0937,19.1300">📍 mapa</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Stara+Maslina+Bar+Montenegro+oldest+olive+tree">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">14:30–17:00</td>
+      <td class="activity">🏖️ Plaża Devachen / Sutomore <span class="star">4.6★</span> <span class="reviews">418 opinii</span><small>5km na północ od Bar. Piaszczysta, płytka — dobra dla młodszego dziecka.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.1371,19.0371">📍 42.1371,19.0371</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Devachen+beach+Sutomore">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">17:30</td>
+      <td class="activity">🚶 Bar centrum — promenada Barsko Šetalište <span class="star">4.9★</span><small>Spacer nadmorski, port, widok na morze. Lody przy marina.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0979,19.0911">📍 42.0979,19.0911</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Barsko+Setaliste+Bar+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">19:30</td>
+      <td class="activity">🍽️ The Sons Eatery <span class="star">4.9★</span> <span class="reviews">465 opinii</span> <a class="menu-link" href="https://www.thesonsdoo.com/index.html">🍽️ menu</a><small><strong>⚠ Lokalizacja: Stari Bar</strong> (historyczna dzielnica, ~5 min autem od centrum Bar). Kuchnia turecko-śródziemnomorska — lahmacun, mezes, smashed burgery. <strong>Dzieci: smashed burger lub lahmacun (pizza arabska) = hit u nastolatków.</strong> Ceny: ok. 10–18€/danie. Rezerwacja: tel. <strong>+382 68 162 450</strong> lub online (thesonsdoo.com) — dzwoń rano dnia wizyty.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/The+Sons+Eatery+Bar/@42.0934,19.1332,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=The+Sons+Eatery+Bar+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">20:14</td>
+      <td class="activity">🌅 Zachód słońca — Panorama Viewpoint<small>Po drodze powrotnej z Baru, ~150m n.p.m., widok na całe wybrzeże.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0504,19.1310">📍 42.0504,19.1310</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Panorama+Viewpoint+Bar+Montenegro+sunset">🖼️</a></td>
+    </tr>
+  </table>
+  <div class="warn-box">❌ Nie kupuj oliwy od ulicznych sprzedawców przy Stari Bar — Reddit potwierdził: „ładna butelka, środek to olej słonecznikowy z aromatem oliwki". Kup w Voli lub na Zelena Pijaca.</div>
+</div>
+
+<!-- DZIEŃ 3 -->
+<div class="section">
+  <div class="section-header">
+    <span class="day-badge rain">Czwartek 5.06</span>
+    <div>
+      <div class="section-title">Jezioro Skadar — Virpazar, Rijeka Crnojevića, widok z góry</div>
+      <div class="section-subtitle">🌦 24°C · pochmurno, sucho → idealne na jezioro</div>
+    </div>
+  </div>
+  <div class="day-stats">
+    <span>🚗 ~90 km</span>
+    <span>⏱ ~1h30 jazdy</span>
+    <span>🚶 ~3h pieszo</span>
+    <span>💰 ~150€ dla 4 osób (park 20€ · obiad Pelikan ~65€ · kolacja ~55€ · inne 10€)</span>
+    <span>📷 Najlepszy dzień na zdjęcia</span>
+    <span>🌡 24°C, pochmurno</span>
+  </div>
+  <div class="packing-box"><strong>🎒 Co zabrać rano:</strong> <strong>duże butelki wody</strong> (Pavlova Strana — brak sklepu na górze!) · gotówka 60€ (5€ bilet park/os, obiad) · lekka kurtka lub bluza (wieczorem chłodniej) · aparat + dron (jeśli masz pozwolenie CAA) · wygodne buty (Rijeka Crnojevića — bruk)</div>
+  <div class="info-box">ℹ️ Jezioro Skadar — jedno z największych jezior Bałkanów. Zobaczyć z lądu i z góry — bez długiego rejsu. Widok z Pavlova Strana zapiera dech bardziej niż z łódki.</div>
+  <table>
+    <tr><th>Godzina</th><th>Co</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="time">8:30</td>
+      <td class="activity">Dobra Voda → Virpazar<small>~28km, ~35 min. Malownicza trasa wzdłuż jeziora.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/42.035,19.133/42.2460,19.0906">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">9:15–11:30</td>
+      <td class="activity">🚶 Virpazar — nabrzeże z widokiem na jezioro, stary kamienny most (XVIII w.), twierdza Besac, spacer po miasteczku <span class="star">4.7★</span><small>Bilet wstępu do Parku Narodowego Skadar: 5€/os (kontrola przy bramce). Nabrzeże to idealny punkt na widok jeziora z lądu — pelikany widoczne z brzegu. 📷 <strong>Foto:</strong> Kolorowe łódki rybackie na tle jeziora i gór — o 9:15 prawie nikogo. Pelikany często siedzą przy brzegu.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.2460,19.0906">📍 42.2460,19.0906</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Virpazar+Montenegro+Skadar+Lake+bridge">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">12:00–13:30</td>
+      <td class="activity">🍽️ Restaurant Pelikan <span class="star">4.8★</span> <span class="reviews">7 389 opinii</span> <a class="menu-link" href="https://foodbook.me/en/promotions/547/menu-of-the-best-restaurant-in-virpazar-montenegro">🍽️ menu</a><small><strong>Ceny (menu 2024):</strong> Karp ze Skadar 14€ · Pstrąg 10€ · Węgorz 18€ · Mieszane ryby (3 gat.) 16€ · Karp w owocach 22€ · Njeguški stek 11€ · Wołowina 16€ · Zupa rybna 4€ · Zimna przekąska jeziorna 12€. Ryba z jeziora Skadar — jedna z najlepiej ocenionych restauracji w Czarnogórze (foodbook.me 2024).</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Restaurant+Pelikan+Virpazar/@42.2468,19.0903,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Restaurant+Pelikan+Virpazar+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">14:00–14:25</td>
+      <td class="activity">Virpazar → Rijeka Crnojevića<small>~25 min, 22 km drogą M-2.3 w kierunku Podgoricy.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/42.2460,19.0906/42.3490,19.0250">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">14:30–15:30</td>
+      <td class="activity">🚶 Rijeka Crnojevića — historyczna wioska przy rzece <span class="star">4.6★</span> 1200 opinii<small>Stary most osmański, kawiarnie nad rzeką, widok na kanion. Punkt wyjścia na Pavlova Strana. 📷 <strong>Foto:</strong> Stań na moście osmańskim — zielony kanion po obu stronach. Najpiękniejsze tło rodzinne na całej trasie. 4 osoby mieszczą się w kadrze bez tłoku.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.3490,19.0250">📍 42.3490,19.0250</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Rijeka+Crnojevica+Montenegro+river">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">15:30–16:30</td>
+      <td class="activity">🌅 Pavlova Strana Viewpoint <span class="star">4.9★</span> <span class="reviews">2 328 opinii</span><small>Najpiękniejszy widok na całe Jezioro Skadar — panorama 180° z góry. <strong>Jak dotrzeć:</strong> 5 min autem od centrum Rijeka Crnojevića pod górę (GPS: 42.3627,19.0577). Parking przy punkcie widokowym. 0 min od auta do widoku. 📷 <strong>Foto:</strong> Sylwetka rodziny na tle całego jeziora — dramatyczne tło, żadnego innego miejsca nie można tu pobić. 🚁 <strong>Dron:</strong> Jezioro Skadar z góry — najpiękniejszy kadr w CG. ⚠️ Wymaga pozwolenia CAA + Parku Narodowego — złóż wniosek min. 2 tygodnie przed wyjazdem.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.3627397,19.0576804">📍 42.3627,19.0577</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Pavlova+Strana+viewpoint+Skadar+Lake">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">17:00</td>
+      <td class="activity">Powrót do hotelu, basen</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">19:30</td>
+      <td class="activity">🍽️ Konoba 'kod Avda' <span class="star">4.9★</span> <span class="reviews">146 opinii</span> <a class="menu-link" href="https://restaurantguru.com/Konoba-kod-Avda-Stari-Bar">🍽️ menu</a><small>Bar, 20 min od Dobrej Vody. Domowa kuchnia czarnogórska — jagnięcina, gulasz, pite. <strong>Dzieci: jagnięcina pieczona lub sarmice (gołąbki) — tradycyjnie, sycąco.</strong> Rezerwacja telefoniczna polecana.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Konoba+kod+Avda+Bar/@42.1029,19.1248,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+kod+Avda+Bar+Montenegro">🖼️</a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- DZIEŃ 4 -->
+<div class="section">
+  <div class="section-header">
+    <span class="day-badge sun">Piątek 6.06</span>
+    <div>
+      <div class="section-title">Ada Bojana + Ulcinj — kajaki rano, twierdza, plaża</div>
+      <div class="section-subtitle">☀️ 27°C · czyste niebo · kajaki w chłodzie poranka, spokojne morze</div>
+    </div>
+  </div>
+  <div class="day-stats">
+    <span>🚗 ~100 km</span>
+    <span>⏱ ~2.5h jazdy</span>
+    <span>🚶 ~1.5h pieszo</span>
+    <span>🛶 ~2.5h kajaków</span>
+    <span>💰 ~265€ dla 4 osób (Ada 24€ · kajaki ~60€ · leżaki 20€ · obiad ~95€ · kolacja ~55€ · inne 10€)</span>
+    <span>🌡 27°C, słonecznie</span>
+  </div>
+  <div class="packing-box"><strong>🎒 Co zabrać rano:</strong> strój kąpielowy · <strong>krem UV SPF 50+</strong> (Velika Plaża — 12 km plaży BEZ cienia!) · kapelusz · buty wodne lub klapki · gotówka 80€ (wstęp + kajak + jedzenie) · duże butelki wody · dron (Ada Bojana — wolna strefa, poranne miękkie światło = najpiękniejsze kolory wody!)</div>
+  <table>
+    <tr><th>Godzina</th><th>Co</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="time">8:30</td>
+      <td class="activity">Dobra Voda → Ada Bojana<small>~35 km, ~40 min na południe. Jedzie się prosto — ada to wyspa-delta na ujściu rzeki Bojany.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/42.035,19.133/41.8695,19.3499">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">9:15–11:45</td>
+      <td class="activity">🛶 Ada Bojana — kajaki RANO <span class="star">4.7★</span> <span class="reviews">960 opinii</span><small>Trójkątna wyspa-delta przy ujściu rzeki Bojany. Wstęp 6€/os. <strong>Rano = wiatr jeszcze nie wieje, woda gładka, mniej ludzi — najlepszy czas na kajaki!</strong>
+        <div class="info-box" style="margin:6px 0 0; padding:8px 12px; font-size:0.8rem;">🛶 <strong>Wypożyczalnia kajaków — Kayak &amp; SUP Ada Bojana</strong> <span class="star">5.0★</span> (31 opinii)<br>
+        📍 <a class="map-link" href="https://www.google.com/maps/place/41.8695,19.3499">GPS 41.8695, 19.3499</a> — Hakuna Matata apartments, L82 na wyspie Ada Bojana (bezpośrednio na plaży)<br>
+        📞 Tel: <strong>+382 67 833 369</strong> — zadzwoń dzień wcześniej, żeby mieć pewność dostępności w czerwcu<br>
+        💰 <strong>Ceny:</strong> Kajak 2-osobowy 30€/dzień · Kajak 1-osobowy 20€/dzień · SUP 20€/dzień<br>
+        👨‍👩‍👧‍👦 Dla 4 osób: 2 kajaki 2-osobowe = <strong>60€ łącznie</strong> · Wynajem od 1h do całego dnia · Sprzęt EU</div>
+        📷 <strong>Foto:</strong> Kajaki na tle miejsca gdzie rzeka spotyka morze — poranne miękkie światło daje najczystsze kolory wody. 🚁 <strong>Dron:</strong> Wolna strefa, otwarta plaża. Rano = spokój, brak turystów. Delta rzeki z powietrza to unikat — nigdzie indziej w CG.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/41.8695,19.3499">📍 41.8695,19.3499</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Ada+Bojana+Montenegro+kayak">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">12:00</td>
+      <td class="activity">Ada Bojana → Ulcinj<small>~15 km na północ, ~20 min.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/41.8695,19.3499/41.9234,19.2134">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">12:20–13:30</td>
+      <td class="activity">🏛️ Ulcinj Stari Grad — twierdza iliryjsko-wenecko-osmańska <span class="star">4.6★</span> <span class="reviews">1 037 opinii</span><small>Zamek na klifie z widokiem na Adriatyk. Muzeum, stare uliczki, meczet z 1719 r. Wstęp bezpłatny. 📷 <strong>Foto:</strong> Mury nad pionowym klifem — turkusowe morze w dole, długa plaża w tle. 🚁 <strong>Dron:</strong> Od strony morza — twierdza na klifie z powietrza. Nie lataj nad centrum Stari Grad.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/41.9234,19.2134">📍 41.9234,19.2134</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Ulcinj+Old+Town+fortress+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">13:30–15:00</td>
+      <td class="activity">🍽️ Dulcinea 1984 <span class="star">4.9★</span> <span class="reviews">4 332 opinii</span> <a class="menu-link" href="https://www.tripadvisor.com/Restaurant_Review-g652061-d3344881-Reviews-Restaurant_Dulcinea-Ulcinj_Ulcinj_Municipality.html">🍽️ menu/opinie</a><small>Rodzinna, owoce morza. <strong>Ceny: Krewetki ~27€ · Kalmary ~15€ · Ośmiornica ~17€ · Talerz owoców morza dla 2 os. ~35€ · Ryba grillowana ~20€.</strong> Dla dzieci: zapytaj o makaron lub rybę z frytkami — kuchnia rodzinna, wyjdą naprzeciw. Rezerwacja obowiązkowa — dzwoń rano lub wejdź osobiście. ⚠ Oblężona w szczycie — bez rezerwacji czekasz 45+ min.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Dulcinea+1984+Ulcinj/@41.9232,19.2016,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Dulcinea+1984+Ulcinj+restaurant">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">15:30–18:00</td>
+      <td class="activity">🏖️ Velika Plaža — 12 km piaszczystej plaży <span class="star">4.5★</span> <span class="reviews">1 595 opinii</span><small>Najdłuższa plaża Czarnogóry. Płytko, bezpiecznie dla dzieci. Leżaki ~5€/szt. ZERO cienia — weź parasol i krem UV!</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/41.8960,19.2670">📍 41.8960,19.2670</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Velika+Plaza+Ulcinj+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">18:30</td>
+      <td class="activity">Powrót do Dobrej Vody<small>~40 min, ~35 km. Możliwy postój na Panorama Viewpoint (42.0504, 19.1310) po drodze.</small></td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">19:30</td>
+      <td class="activity">🍽️ Konoba Balkan — lokalna kuchnia bliżej hotelu <span class="star">4.6★</span> <span class="reviews">367 opinii</span> <a class="menu-link" href="https://restaurantguru.com/Konoba-Balkan-Montenegro">🍽️ menu</a></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Konoba+Balkan+Dobra+Voda/@42.0299,19.1465,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Balkan+Dobra+Voda">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">20:16</td>
+      <td class="activity">🌅 Zachód słońca — plaża Dobra Voda lub Montana Tower<small>Montana Tower (42.0260, 19.1604) — bar z tarasami, 2 min autem od hotelu. Złota godzina 19:00–20:15.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0260,19.1604">📍 42.0260,19.1604</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Dobra+Voda+Montenegro+sunset">🖼️</a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- DZIEŃ 5 -->
+<div class="section">
+  <div class="section-header">
+    <span class="day-badge hot">Sobota 7.06</span>
+    <div>
+      <div class="section-title">Kotor — UNESCO + widok z twierdzy</div>
+      <div class="section-subtitle">🔥 29°C · najgorętszy dzień · najlepszy na Zatokę Kotorską</div>
+    </div>
+  </div>
+  <div class="day-stats">
+    <span>🚗 ~210 km</span>
+    <span>⏱ ~4h jazdy łącznie</span>
+    <span>🚶 ~4h pieszo</span>
+    <span>🏰 San Giovanni: 1350 schodów · ⏱ 45min w górę</span>
+    <span>💰 ~195€ dla 4 osób (bilety+parking ~60€ · obiad ~45€ · kolacja ~75€ · inne 15€)</span>
+    <span>🌡 29°C — najgorętszy dzień!</span>
+  </div>
+  <div class="packing-box"><strong>🎒 Co zabrać rano:</strong> <strong>DUŻO WODY</strong> — min. 2l/os (29°C + 1350 schodów!) · <strong>wygodne buty ze sznurówkami</strong> (San Giovanni — strome, nieregularne stopnie) · kapelusz/chusta · gotówka 80€ (parking Kotor 5–10€, bilet 8€/os, łódka 5€/os, jedzenie) · krem UV · aparat</div>
+  <div class="tip-box">💡 29°C to najgorętszy dzień całego wyjazdu. Kotor — mury i wąskie uliczki — lepiej wejść wcześnie rano (przed 11:00) zanim zrobi się gorąco. Na miejscu jest wiele kawiarni z klimatyzacją.</div>
+  <table>
+    <tr><th>Godzina</th><th>Co</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="time">7:30</td>
+      <td class="activity">Wyjazd z Dobrej Vody → Kotor<small>~85km, ~1h20min. Trasa E80 wzdłuż wybrzeża przez Budvę — piękne widoki!</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Kotor">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">9:00–12:00</td>
+      <td class="activity">🏛️ Kotor — Stare Miasto UNESCO <span class="star">4.7★</span> <span class="reviews">18 000+ opinii</span><small>Katedra św. Tryfona, mury miejskie, plac broni. Kampana Tower 4.7★ (4938 rec.).</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.4237,18.7710">📍 42.4237,18.7710</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Kotor+Old+Town+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">9:30–11:00</td>
+      <td class="activity">🏰 Twierdza San Giovanni — 1350 stopni, widok <span class="star">4.9★</span> <span class="reviews">774 opinii</span><small>Bilet 8€. „Best View of Kotor" — Zatoka Kotorska z 280m. Warto wcześnie przed upałem.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.4272,18.7748">📍 42.4272,18.7748</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Kotor+fortress+San+Giovanni+view">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">12:00–13:30</td>
+      <td class="activity">🍽️ Pepe Nero <span class="star">4.7★</span> <span class="reviews">1 309 opinii</span> <a class="menu-link" href="https://pepenerokotor.com/en/">🍽️ menu</a><small>Pizza neapolitańska dla dzieci, owoce morza (brancino, kalmary, risotto z owocami morza) dla dorosłych. Menu PDF online. <strong>Najlepszy split: pizza Margherita/Pepperoni dla dzieci — owoce morza dla was.</strong> W centrum starego miasta.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Pepe+Nero+Kotor/@42.4254,18.7718,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Pepe+Nero+Kotor+restaurant">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">14:00–15:30</td>
+      <td class="activity">🚶 Perast — barokowe miasteczko <span class="star">4.7★</span><small>30 min od Kotoru. <strong>Łódka na wyspę Gospa od Škrpjela:</strong> wsiadaj z nabrzeża w centrum Perast <a class="map-link" href="https://www.google.com/maps/place/42.4869,18.6992">GPS 42.4869,18.6992</a> → 5€/os w obie strony, co 15–30 min. Na wyspie: XVII-wieczny kościół z freskami, widok na całą Zatokę Kotorską. Powrót tą samą łódką — sygnalizuj z brzegu. 📷 <strong>Foto (2 lokacje):</strong> (1) Nabrzeże Perast — weneckie pałace wzdłuż wody, każdy kadr wychodzi. (2) Z łódki na wyspę — zdjęcie kościoła na wodzie z górami w tle. Unikatowe w Europie.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.4869,18.6992">📍 42.4869,18.6992</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Perast+Montenegro+island">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">16:00</td>
+      <td class="activity">📷 Sveti Stefan — foto stop <span class="star">4.9★</span><small>Parkuj na punkcie widokowym nad E65. Nie da się przeoczyć — różowy klif w morzu. 📷 <strong>Foto:</strong> Najlepsze po 16:00 — słońce z frontu, klif w pełnym świetle. Zdjęcie z rodziną z barierą w dole = głębia. 0 min od auta.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.2581,18.8929">📍 42.2581,18.8929</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Sveti+Stefan+viewpoint+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">17:30</td>
+      <td class="activity">Powrót do Dobrej Vody</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">18:30</td>
+      <td class="activity">🍽️ Pino del Mar Restaurant &amp; Beach Bar <span class="star">4.8★</span> <span class="reviews">1 416 opinii</span> <a class="menu-link" href="https://foodbook.me/en/promotions/705/menu-of-the-restaurant-pino-del-mar-in-bar-susanj">🍽️ menu</a><small>Na plaży, na północ od Baru. Ostatnia kolacja z widokiem na morze. <strong>Dzieci: pizza lub pasta — Pino del Mar ma pełne menu, nie tylko ryby.</strong> Rezerwacja polecana.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/Pino+del+Mar+Bar+Montenegro/@42.1164,19.0767,17z">📍 wizytówka</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Pino+del+Mar+Bar+Montenegro+beach">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">20:16</td>
+      <td class="activity">🌅 Zachód słońca — Montenegro Tower, Dobra Voda<small>Bar z tarasami na wzgórzu, 2 min od hotelu. Ewentualnie coniedzielny event (jeśli nadal aktywny — sprawdź lokalnie).</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0260,19.1604">📍 42.0260,19.1604</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Montenegro+Tower+Dobra+Voda+sunset">🖼️</a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- DZIEŃ 6 -->
+<div class="section">
+  <div class="section-header">
+    <span class="day-badge">Niedziela 8.06</span>
+    <div>
+      <div class="section-title">Wyjazd — wylot 13:25</div>
+      <div class="section-subtitle">Spokojna poranną plaża, wyjazd ~10:30</div>
+    </div>
+  </div>
+  <div class="day-stats">
+    <span>🚗 65 km (do TGD)</span>
+    <span>⏱ ~1h15 jazdy</span>
+    <span>🚶 ~1h plażowanie</span>
+    <span>✈️ Wylot 13:25 — wyjedź max 10:30</span>
+  </div>
+  <div class="packing-box"><strong>🎒 Pakowanie wieczór wcześniej:</strong> bagaż spakowany w sobotę wieczór · dokumenty podróżne na wierzch · gotówka euro na lotnisko · ⚠️ sprawdź czy masz wszystkie ładowarki i adapter · dron: upewnij się że akumulatory w bagażu rejestrowanym (nie podręcznym!)</div>
+  <div class="info-box">ℹ️ Wylot 13:25 z Podgoricy. Droga Dobra Voda → TGD: ~65km, ~1h15min. Wyjedź najpóźniej o 10:30, żeby mieć 2h na odprawę.</div>
+  <table>
+    <tr><th>Godzina</th><th>Co</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="time">7:30</td>
+      <td class="activity">Śniadanie w hotelu</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">8:30–10:00</td>
+      <td class="activity">🏖️ Ostatnia kąpiel — Veliki Pijesak Beach<small>Plaża 2 min spacerem. Morze, spokój, Czarnogóra raz jeszcze.</small></td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0346,19.1428">📍 42.0346,19.1428</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Veliki+Pijesak+Dobra+Voda+beach">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="time">10:30</td>
+      <td class="activity">Wymeldowanie → wyjazd do Podgoricy</td>
+      <td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Podgorica+Airport">📍 trasa</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">~11:45</td>
+      <td class="activity">Lotnisko TGD — check-in, odprawa</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.3594,19.2519">📍 42.3594,19.2519</a></td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td class="time">13:25</td>
+      <td class="activity">✈️ Wylot Podgorica</td>
+      <td>—</td>
+      <td>—</td>
+    </tr>
+  </table>
+</div>
+
+<!-- RESTAURACJE -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:4px;">🍽️ Wszystkie restauracje</h2>
+  <p style="font-size:0.83rem; color:#718096; margin-bottom:20px;">Tylko miejsca zweryfikowane przez Google Maps (SerpAPI). Oceny i liczby opinii aktualne na maj 2026.</p>
+
+  <h3 class="subsection">Dobra Voda i okolice</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="name">Cevabdzinica Kolovic</div>
+      <div class="meta"><span class="star">4.8★</span> · 457 opinii · Grill, ćevapi — tradycyjne, dzieci uwielbiają</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Cevabdzinica+Kolovic+Dobra+Voda/@42.0519,19.1414,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://eeur-cdn.speisekarte.menu/storage/media/companies_menu_pdf/88675121/cevabdzinica-kolovic-dobra-voda-speisekarte.pdf">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Cevabdzinica+Kolovic">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Restaurant Konoba Ribar</div>
+      <div class="meta"><span class="star">4.6★</span> · 661 opinii · Owoce morza — NAJBLIŻEJ hotelu</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Konoba+Ribar+Pecurice/@42.0303,19.1747,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Ribar+Pecurice+Montenegro">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Konoba Balkan</div>
+      <div class="meta"><span class="star">4.6★</span> · 367 opinii · Lokalna kuchnia, grill</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Konoba+Balkan+Dobra+Voda/@42.0299,19.1465,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Balkan+Dobra+Voda">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Dubrava Konoba</div>
+      <div class="meta"><span class="star">4.5★</span> · 390 opinii · Lokalna</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Dubrava+Konoba+Pecurice/@42.0298,19.1550,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Dubrava+Konoba+Montenegro">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Konoba Makina Vucinica</div>
+      <div class="meta"><span class="star">4.5★</span> · 487 opinii · Lokalna</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Konoba+Makina+Vucinica/@42.0485,19.1449,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Makina+Vucinica">🖼️</a>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Bar</h3>
+  <div class="card-grid">
+    <div class="card" style="border-color:#f6ad55;">
+      <div class="name">The Sons Eatery ⭐</div>
+      <div class="meta"><span class="star">4.9★</span> · 465 opinii · Kuchnia turecko-śródziemnomorska · Stari Bar · <em>smashed burger = hit dla dzieci</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/The+Sons+Eatery+Bar/@42.0934,19.1332,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://www.thesonsdoo.com/index.html">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=The+Sons+Eatery+Bar+Montenegro">🖼️</a>
+      </div>
+    </div>
+    <div class="card" style="border-color:#f6ad55;">
+      <div class="name">Konoba 'kod Avda' ⭐</div>
+      <div class="meta"><span class="star">4.9★</span> · 146 opinii · Domowa kuchnia czarnogórska · <em>jagnięcina, sarmice, gulasz</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Konoba+kod+Avda+Bar/@42.1029,19.1248,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://restaurantguru.com/Konoba-kod-Avda-Stari-Bar">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+kod+Avda+Bar">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Pino del Mar</div>
+      <div class="meta"><span class="star">4.8★</span> · 1 416 opinii · Nad wodą, beach bar · <em>pizza + pasta dla dzieci</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Pino+del+Mar+Bar+Montenegro/@42.1164,19.0767,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://foodbook.me/en/promotions/705/menu-of-the-restaurant-pino-del-mar-in-bar-susanj">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Pino+del+Mar+Bar+Montenegro">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Morski Vuk</div>
+      <div class="meta"><span class="star">4.8★</span> · 138 opinii · Owoce morza</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Morski+Vuk+Bar/@42.0974,19.0995,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://glovoapp.com/en/me/bar/stores/morski-vuk-bbr">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Morski+Vuk+Bar+Montenegro">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Konoba Bedem</div>
+      <div class="meta"><span class="star">4.7★</span> · 2 135 opinii · Grill przy twierdzy · <em>mix z grilla OK dla dzieci</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Konoba+Bedem+Stari+Bar/@42.0937,19.1339,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://www.tripadvisor.com/Restaurant_Review-g3174379-d8087788-Reviews-Konoba_Bedem-Stari_Bar_Bar_Municipality.html">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Bedem+Stari+Bar">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Restoran Kaldrma</div>
+      <div class="meta"><span class="star">4.7★</span> · 784 opinii · Tradycyjna, od 2004</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Restoran+Kaldrma+Stari+Bar/@42.0939,19.1340,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Restoran+Kaldrma+Stari+Bar">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Fish Bar Cvijo</div>
+      <div class="meta"><span class="star">4.7★</span> · 369 opinii · Ryby, przy rynku</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Fish+Bar+Cvijo+Bar/@42.0974,19.0993,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Fish+Bar+Cvijo+Bar">🖼️</a>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Ulcinj</h3>
+  <div class="card-grid">
+    <div class="card" style="border-color:#f6ad55;">
+      <div class="name">Dulcinea 1984 ⭐</div>
+      <div class="meta"><span class="star">4.9★</span> · 4 332 opinii · Owoce morza — rezerwacja obowiązkowa · <em>zapytaj o makaron/rybę z frytkami dla dzieci</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Dulcinea+1984+Ulcinj/@41.9232,19.2016,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://www.tripadvisor.com/Restaurant_Review-g652061-d3344881-Reviews-Restaurant_Dulcinea-Ulcinj_Ulcinj_Municipality.html">🍽️ menu/opinie</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Dulcinea+1984+Ulcinj">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Taphana</div>
+      <div class="meta"><span class="star">4.9★</span> · 856 opinii · Stare Miasto, widok na morze</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Taphana+Ulcinj/@41.9228,19.2015,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Taphana+Ulcinj">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Antigona</div>
+      <div class="meta"><span class="star">4.8★</span> · 2 761 opinii · Ryby, owoce morza</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Antigona+Ulcinj/@41.9235,19.2003,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Antigona+Ulcinj+restaurant">🖼️</a>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Virpazar / Jezioro Skadar</h3>
+  <div class="card-grid">
+    <div class="card" style="border-color:#f6ad55;">
+      <div class="name">Restaurant Pelikan ⭐</div>
+      <div class="meta"><span class="star">4.8★</span> · 7 389 opinii · Ryba z jeziora — jedna z najlepszych w CG · <em>Njeguški stek dla dzieci (mięso, nie ryba)</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Restaurant+Pelikan+Virpazar/@42.2468,19.0903,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://foodbook.me/en/promotions/547/menu-of-the-best-restaurant-in-virpazar-montenegro">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Restaurant+Pelikan+Virpazar">🖼️</a>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="subsection">Kotor</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="name">Pepe Nero</div>
+      <div class="meta"><span class="star">4.7★</span> · 1 309 opinii · Pizza neapolitańska + owoce morza · <em>idealne dla rodziny: każdy znajdzie coś swojego</em></div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Pepe+Nero+Kotor/@42.4254,18.7718,17z">📍 wizytówka</a>
+        <a class="menu-link" href="https://pepenerokotor.com/en/">🍽️ menu</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Pepe+Nero+Kotor">🖼️</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="name">Konoba Scala Santa</div>
+      <div class="meta"><span class="star">4.5★</span> · 2 116 opinii · Owoce morza, starówka</div>
+      <div class="links">
+        <a class="map-link" href="https://www.google.com/maps/place/Konoba+Scala+Santa+Kotor/@42.4237,18.7715,17z">📍 wizytówka</a>
+        <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Konoba+Scala+Santa+Kotor">🖼️</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ZACHODY SŁOŃCA -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:4px;">🌅 Punkty na zachód słońca</h2>
+  <p style="font-size:0.83rem; color:#718096; margin-bottom:16px;">Zachód: 20:14–20:17 przez cały pobyt. Wieczory są długie.</p>
+  <div class="sunset-grid">
+    <div class="sunset-card">
+      <div class="name">⭐ Montenegro Tower, Dobra Voda</div>
+      <div class="desc">Bar na wzgórzu z 10 tarasami. <strong>Godziny: Czw–Nd 18:00–23:00</strong> (od 19 czerwca lato: Pt–Nd 18:00). <strong>Wejście wolne</strong> — zapłać tylko za drinka. Muzyka od zachodu słońca. Adres: Ravanj 128, Pečurice — 3 min autem od plaży Dobrej Vody (droga prowadzi pod górę, jest asfaltowa).</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.0260,19.1604">📍 42.0260,19.1604</a>
+      <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Montenegro+Tower+Dobra+Voda+sunset" style="margin-left:4px; display:inline-flex; align-items:center; gap:4px; background:#faf5ff; color:#6b46c1; border-radius:6px; padding:3px 8px; font-size:0.78rem; font-weight:600;">🖼️</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">⭐ Panorama Viewpoint</div>
+      <div class="desc">4.7★, 230 opinii. Na drodze E65 (Bar → Dobra Voda), ~150m n.p.m. Parkuj przy drodze — widok 0 min od auta. Najlepszy 30 min przed zachodem, gdy słońce schodzi za wzgórze i oświetla wybrzeże od zachodu. Nie ma bariery — ostrożnie z dziećmi przy krawędzi.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.0504,19.1310">📍 42.0504,19.1310</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">Twierdza Ulcinj Stari Grad</div>
+      <div class="desc">Klif nad morzem. Najdramatyczniejszy widok — czerwono-złoty horyzont Adriatyku. <strong>Dojazd:</strong> parking <a class="map-link" href="https://www.google.com/maps/place/41.9237,19.2019">GPS 41.9237,19.2019</a> (2–3€) → 5 min pieszo po brukowanych schodach do bramy twierdzy. Wejście bezpłatne. Zostań na murach aż słońce zejdzie za horyzont.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/41.9233,19.2019">📍 41.9233,19.2019</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">Plaża Veliki Pijesak</div>
+      <div class="desc">Prosta, spokojna. Zachód wprost nad morzem z plaży przy hotelu. Zero wysiłku.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.0346,19.1428">📍 42.0346,19.1428</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">Szczyt Rumija (1595 m n.p.m.)</div>
+      <div class="desc">4.7★, 106 opinii. Widok 360°: Adriatyk + Jezioro Skadar + Albania. 4–6h treking lub wyprawa jeepem. Tylko przy doskonałej pogodzie.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.1031,19.1878">📍 42.1031,19.1878</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">Twierdza San Giovanni, Kotor</div>
+      <div class="desc">Zatoka Kotorska w złotym świetle. 1h20min drogi od hotelu. <strong>Dojazd:</strong> wejście przez mury Kotoru — brama wschodnia <a class="map-link" href="https://www.google.com/maps/place/42.4272,18.7748">GPS 42.4272,18.7748</a>. 1350 stopni w górę, ~45 min marszu. Bilet 8€ (wlicza dostęp do murów). Wyjdź najpóźniej 2h przed zachodem, żeby mieć czas na zejście w dzień.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.4224,18.7750">📍 42.4224,18.7750</a>
+    </div>
+  </div>
+</div>
+
+<!-- ZDJĘCIA -->
+<div class="section" style="margin-bottom:24px;">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:4px;">📸 Miejsca na zdjęcia</h2>
+  <p style="font-size:0.83rem; color:#718096; margin-bottom:16px;">Złota godzina: 19:00–20:15. Zachód słońca: 20:14–20:17.</p>
+
+  <h3 class="subsection">📷 Najpiękniejsze kadry — zdjęcia rodzinne</h3>
+  <table>
+    <tr><th>Miejsce</th><th>Dlaczego warto</th><th>Kiedy</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr>
+      <td class="activity"><strong>Most osmański</strong><small>Rijeka Crnojevića</small></td>
+      <td class="activity"><small>Wąski kamienny most nad zielonym kanonem. Najpiękniejsze tło na trasie — 4 osoby mieszczą się w kadrze, tłumu prawie nie ma.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Cz 5.06<br>~15:00</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.3490,19.0250">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Rijeka+Crnojevica+old+bridge+Montenegro+canyon">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Gospa od Škrpjela</strong><small>Wyspa na wodzie, Perast</small></td>
+      <td class="activity"><small>XVII-wieczny kościół na sztucznej wyspie, w tle góry. Zdjęcie z łódki na wodzie — widok unikatowy w całej Europie.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Sb 7.06<br>~13:00</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.4869,18.6992">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Gospa+od+Skrpjela+island+Perast+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Twierdza Stari Bar</strong><small>Ruiny z XI w.</small></td>
+      <td class="activity"><small>Mury osmańskie porośnięte figowcami i oliwkami. Naturalne ramy do zdjęć przez kamienne łuki. Widok na morze z murów.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Śr 4.06<br>~9:30</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0941,19.1349">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Stari+Bar+fortress+ruins+Montenegro+arch">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Twierdza Ulcinj</strong><small>Klif nad morzem</small></td>
+      <td class="activity"><small>Mury nad pionowym klifem, w dole turkusowe morze, w tle długa plaża. Rano — bez słońca wprost w obiektyw.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Pt 6.06<br>~10:00</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/41.9237,19.2019">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Ulcinj+fortress+cliff+sea+Montenegro+view">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Small Cove — ukryta zatoczka</strong><small>Mali Pijesak, Dobra Voda</small></td>
+      <td class="activity"><small>Turkusowa zatoczka skalna dostępna tylko pieszo. Zdjęcia w wodzie lub na kamieniach — turystów prawie nie ma.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Śr 4.06<br>popołudnie</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0394,19.1435">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Small+Cove+cave+Dobra+Voda+Montenegro+beach">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Virpazar — nabrzeże</strong><small>Kolorowe łódki rybackie</small></td>
+      <td class="activity"><small>Drewniane łódki na tle jeziora i gór. Przed 10:00 — spokojnie, pelikany na brzegu.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Cz 5.06<br>~9:15</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.2460,19.0906">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Virpazar+harbor+fishing+boats+Lake+Skadar">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Pavlova Strana</strong><small>Panorama jeziora z góry</small></td>
+      <td class="activity"><small>180° widok na całe jezioro. Sylwetka rodziny na tle jeziora i gór — dramatyczne, niespotykane nigdzie indziej na trasie.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Cz 5.06<br>~15:30</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.3627397,19.0576804">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Pavlova+Strana+viewpoint+Skadar+Lake+panorama">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Perast — nabrzeże</strong><small>Weneckie pałace</small></td>
+      <td class="activity"><small>Barokowe pałace wzdłuż wody, w tle wyspa Gospa od Škrpjela. Każdy kadr tu wychodzi — bez wysiłku.</small></td>
+      <td class="time" style="white-space:nowrap;font-size:0.8rem">Sb 7.06<br>~12:00</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.4872,18.6933">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Perast+waterfront+promenade+Montenegro+Bay+of+Kotor">🖼️</a></td>
+    </tr>
+  </table>
+
+  <h3 class="subsection">🚁 Dron — 4 najlepsze miejsca</h3>
+  <div class="warn-box">⚠️ <strong>Zasady lotów w Czarnogórze:</strong> Dron &gt;250g wymaga rejestracji. Park Narodowy Skadar: dodatkowe pozwolenie Urzędu Lotnictwa Cywilnego (CAA) + parku — złóż wniosek min. 2 tygodnie wcześniej na <strong>caa.me</strong>. Zakaz lotu nad starymi miastami (Kotor, Ulcinj centrum, Stari Bar). Ada Bojana i otwarte wybrzeże: wolna strefa.</div>
+  <div class="sunset-grid" style="grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); margin-top:12px;">
+    <div class="sunset-card">
+      <div class="name">🌊 Ada Bojana — delta rzeki</div>
+      <div class="desc">Rzeka wpada do morza — unikatowy widok z powietrza. Wolna strefa, otwarta plaża, brak zabudowań. Piątek 6.06 — idealna złota godzina 19:00–20:00.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/41.8956,19.3590" style="font-size:0.78rem;">📍 mapa</a>
+      <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Ada+Bojana+delta+drone+aerial+Montenegro" style="margin-left:8px;font-size:0.78rem;">🖼️ widok</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">🏔️ Pavlova Strana — jezioro Skadar</div>
+      <div class="desc">Najpiękniejszy kadr z drona w Czarnogórze. ⚠️ Wymaga pozwolenia CAA + Parku Narodowego — złóż wniosek z wyprzedzeniem. Czwartek 5.06, ~15:30.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.3627397,19.0576804" style="font-size:0.78rem;">📍 mapa</a>
+      <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Skadar+Lake+drone+aerial+Montenegro" style="margin-left:8px;font-size:0.78rem;">🖼️ widok</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">🏖️ Wybrzeże Dobra Voda</div>
+      <div class="desc">Skalne zatoczki z góry — Mali Pijesak i Small Cove z powietrza wyglądają inaczej niż z ziemi. Sprawdź strefę przy hotelu (standardowe przepisy EASA).</div>
+      <a class="map-link" href="https://www.google.com/maps/place/42.035,19.133" style="font-size:0.78rem;">📍 mapa</a>
+      <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Dobra+Voda+beach+drone+aerial+Montenegro+coast" style="margin-left:8px;font-size:0.78rem;">🖼️ widok</a>
+    </div>
+    <div class="sunset-card">
+      <div class="name">🏰 Ulcinj — klif od strony morza</div>
+      <div class="desc">Twierdza na pionowym klifie — z powietrza jak mapa historyczna. Podejdź dronem od strony morza (poza strefą zabudowań). Piątek 6.06 rano.</div>
+      <a class="map-link" href="https://www.google.com/maps/place/41.9237,19.2019" style="font-size:0.78rem;">📍 mapa</a>
+      <a class="img-link" href="https://www.google.com/search?tbm=isch&q=Ulcinj+old+town+fortress+drone+aerial+Montenegro" style="margin-left:8px;font-size:0.78rem;">🖼️ widok</a>
+    </div>
+  </div>
+</div>
+
+<!-- PLAŻE -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:16px;">🏖️ Plaże — ranking</h2>
+  <table class="beach-table">
+    <tr><th>Plaża</th><th>Typ</th><th>★</th><th>Opinii</th><th>Dla dzieci</th><th>Odległość od hotelu</th><th>Mapa</th><th>Zdjęcia</th></tr>
+    <tr class="top">
+      <td class="activity">Velika Plaža, Ulcinj</td>
+      <td>Piasek 12km!</td>
+      <td><span class="star">4.5★</span></td>
+      <td>1 595</td>
+      <td>⭐⭐⭐ Płytko</td>
+      <td>~20km (25min)</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/41.8960,19.2670">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Velika+Plaza+Ulcinj">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity">Devachen Beach, Sutomore</td>
+      <td>Piasek + żwir</td>
+      <td><span class="star">4.6★</span></td>
+      <td>418</td>
+      <td>⭐⭐⭐</td>
+      <td>~15km (20min)</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.1371,19.0371">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Devachen+beach+Sutomore">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity">Mali Pijesak, Dobra Voda</td>
+      <td>Żwir</td>
+      <td><span class="star">4.4★</span></td>
+      <td>146</td>
+      <td>⭐⭐</td>
+      <td>2 min pieszo</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0394,19.1435">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Mali+Pijesak+Dobra+Voda">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity">Veliki Pijesak, Dobra Voda</td>
+      <td>Żwir/kamień</td>
+      <td><span class="star">4.0★</span></td>
+      <td>802</td>
+      <td>⭐⭐</td>
+      <td>2 min pieszo</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0346,19.1428">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Veliki+Pijesak+Dobra+Voda">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity">Utjeha Beach</td>
+      <td>Kamień, turkus</td>
+      <td><span class="star">4.5★</span></td>
+      <td>145</td>
+      <td>⭐⭐</td>
+      <td>~7km (10min)</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/42.0088,19.1488">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Utjeha+beach+Montenegro">🖼️</a></td>
+    </tr>
+    <tr>
+      <td class="activity">Ada Bojana</td>
+      <td>Piasek, wyspa</td>
+      <td><span class="star">4.7★</span></td>
+      <td>960</td>
+      <td>⭐⭐ (wstęp 6€)</td>
+      <td>~45km (50min)</td>
+      <td><a class="map-link" href="https://www.google.com/maps/place/41.8695,19.3499">📍</a></td>
+      <td><a class="img-link" href="https://www.google.com/search?tbm=isch&q=Ada+Bojana+Montenegro+beach">🖼️</a></td>
+    </tr>
+  </table>
+</div>
+
+<!-- MAPA TRASY -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:16px;">🗺️ Mapa trasy — łącznie ~470km</h2>
+  <table class="route-table">
+    <tr><th>Dzień</th><th>Trasa</th><th>km</th><th>Czas jazdy</th><th>Mapa</th></tr>
+    <tr><td>Wt 3.06</td><td>TGD → Dobra Voda</td><td>65</td><td>~1h15</td><td><a class="map-link" href="https://www.google.com/maps/dir/Podgorica+Airport/Dobra+Voda">📍</a></td></tr>
+    <tr><td>Śr 4.06</td><td>Dobra Voda → Stari Bar → Sutomore → Dobra Voda</td><td>40</td><td>~50min</td><td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Stari+Bar/Sutomore/Dobra+Voda">📍</a></td></tr>
+    <tr><td>Cz 5.06</td><td>Dobra Voda → Virpazar → Dobra Voda</td><td>60</td><td>~1h20</td><td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Virpazar/Dobra+Voda">📍</a></td></tr>
+    <tr><td>Pt 6.06</td><td>Dobra Voda → Ulcinj → Ada Bojana → Dobra Voda</td><td>90</td><td>~2h</td><td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Ulcinj/Ada+Bojana/Dobra+Voda">📍</a></td></tr>
+    <tr><td>Sb 7.06</td><td>Dobra Voda → Kotor → Perast → Sveti Stefan → Dobra Voda</td><td>210</td><td>~4h łącznie</td><td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Kotor/Perast/Sveti+Stefan/Dobra+Voda">📍</a></td></tr>
+    <tr><td>Nd 8.06</td><td>Dobra Voda → TGD</td><td>65</td><td>~1h15</td><td><a class="map-link" href="https://www.google.com/maps/dir/Dobra+Voda/Podgorica+Airport">📍</a></td></tr>
+    <tr style="font-weight:700; background:#f7fafc;"><td colspan="2"><strong>Łącznie</strong></td><td><strong>~530</strong></td><td>—</td><td>—</td></tr>
+  </table>
+</div>
+
+<!-- BUDŻET -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:16px;">💰 Budżet — 4 osoby (bez hotelu i lotu)</h2>
+
+  <h3 class="subsection">Wydatki dzień po dniu</h3>
+  <table>
+    <tr><th>Dzień</th><th>Bilety</th><th>Jedzenie (4 os.)</th><th>Inne</th><th style="font-weight:800;color:#276749;">Dziennie</th></tr>
+    <tr>
+      <td class="activity"><strong>Wt 3.06</strong> — Przylot</td>
+      <td>0€</td>
+      <td class="activity"><small>Kolacja Cevabdzinica Kolovic ~30€ + napoje 5€</small></td>
+      <td>—</td>
+      <td style="font-weight:700;color:#276749;">~35€</td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Śr 4.06</strong> — Stari Bar</td>
+      <td>~20€<small>Stari Bar 4×5€ + Maslina 4€</small></td>
+      <td class="activity"><small>Obiad Konoba Bedem ~70€ + kolacja Sons Eatery ~60€</small></td>
+      <td>~10€<small>lody, woda</small></td>
+      <td style="font-weight:700;color:#276749;">~160€</td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Cz 5.06</strong> — Skadar</td>
+      <td>~20€<small>Park Skadar 4×5€</small></td>
+      <td class="activity"><small>Obiad Pelikan ~65€ + kolacja Konoba Avda ~55€</small></td>
+      <td>~10€<small>napoje</small></td>
+      <td style="font-weight:700;color:#276749;">~150€</td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Pt 6.06</strong> — Ulcinj + Ada Bojana</td>
+      <td>~24€<small>Ada Bojana 4×6€</small></td>
+      <td class="activity"><small>Obiad Dulcinea ~95€ + kolacja Konoba Balkan ~55€</small></td>
+      <td>~85€<small>kajaki ~60€ + leżaki 20€ + inne 5€</small></td>
+      <td style="font-weight:700;color:#e53e3e;">~265€</td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Sb 7.06</strong> — Kotor + Perast</td>
+      <td>~60€<small>San Giovanni 4×8€ + Gospa łódka 4×5€ + parking 8€</small></td>
+      <td class="activity"><small>Obiad Pepe Nero ~45€ + kolacja Pino del Mar ~75€</small></td>
+      <td>~15€<small>napoje, lody</small></td>
+      <td style="font-weight:700;color:#276749;">~195€</td>
+    </tr>
+    <tr>
+      <td class="activity"><strong>Nd 8.06</strong> — Wyjazd</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td style="font-weight:700;color:#718096;">0€</td>
+    </tr>
+    <tr style="background:#f0fff4;">
+      <td class="activity"><strong>+ Paliwo ~530km</strong></td>
+      <td colspan="3" style="font-size:0.82rem;color:#4a5568;">ok. 1.50€/l · ~35l → ~50€</td>
+      <td style="font-weight:700;color:#276749;">~50€</td>
+    </tr>
+    <tr style="background:#f0fff4; border-top: 2px solid #9ae6b4;">
+      <td style="font-weight:800;font-size:1rem;">RAZEM</td>
+      <td style="font-weight:700;">~124€</td>
+      <td style="font-weight:700;">~550€</td>
+      <td style="font-weight:700;">~185€</td>
+      <td style="font-weight:800;font-size:1.1rem;color:#276749;">~860€</td>
+    </tr>
+  </table>
+
+  <h3 class="subsection" style="margin-top:20px;">Rozbicie całkowite</h3>
+  <div class="budget-grid">
+    <div class="budget-item"><div class="label">Jedzenie — 5 dni × 4 os.</div><div class="amount">~550€</div><div style="font-size:0.72rem; color:#718096; margin-top:4px;">Obiad + kolacja w restauracji. Śniadanie wliczone w hotel.</div></div>
+    <div class="budget-item"><div class="label">Bilety wstępu</div><div class="amount">~124€</div><div style="font-size:0.72rem; color:#718096; margin-top:4px;">Skadar 20€ · Stari Bar 20€ · Kotor+Perast 52€ · Ada Bojana 24€ · Maslina 4€ · parking 8€</div></div>
+    <div class="budget-item"><div class="label">Aktywności (kajaki, leżaki)</div><div class="amount">~80€</div><div style="font-size:0.72rem; color:#718096; margin-top:4px;">Kajaki Ada Bojana ~60€ · leżaki Velika Plaża 20€</div></div>
+    <div class="budget-item"><div class="label">Paliwo (~530 km)</div><div class="amount">~50€</div><div style="font-size:0.72rem; color:#718096; margin-top:4px;">ok. 1.50€/l benzyna — Czarnogóra</div></div>
+    <div class="budget-item"><div class="label">Napoje, lody, drobiazgi</div><div class="amount">~55€</div><div style="font-size:0.72rem; color:#718096; margin-top:4px;">Woda 0.5€, lody 1–2€, kawa</div></div>
+    <div class="budget-item" style="background:#f0fff4; border: 2px solid #9ae6b4;"><div class="label">RAZEM (bez hotelu i lotu)</div><div class="amount" style="color:#276749;">~860€</div><div style="font-size:0.72rem; color:#276749; margin-top:4px;">= ~215€/os · najdroższy dzień: Pt 6.06 (~265€)</div></div>
+  </div>
+  <div class="tip-box" style="margin-top:16px;">💡 Weź ~250€ gotówki. Łódki, małe konoby, leżaki, kajaki, targ Zelena Pijaca — tylko cash. Dulcinea w Ulcinj — rezerwacja konieczna, płatność przeważnie gotówką.</div>
+</div>
+
+<!-- PRAKTYCZNE -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:16px;">🛒 Praktyczne</h2>
+  <div class="practical-grid">
+    <div class="practical-item">
+      <h4>💶 Pieniądze</h4>
+      <p>Waluta: Euro. Karty Visa/MC wszędzie w restauracjach. Gotówka: łódki, leżaki, mały targ, małe konoby. Weź 150–200€ cash.</p>
+    </div>
+    <div class="practical-item">
+      <h4>🛒 Zakupy spożywcze</h4>
+      <p>Voli — sieć supermarketów, w Barze, Sutomore, Ulcinj. Otwarte codziennie 7–22. W niedzielę krócej.</p>
+      <p style="margin-top:6px;">Zelena Pijaca — targ w Barze, owoce, sery, wino, oliwa z oliwek (tutaj kupuj — nie od sprzedawców przy Stari Bar).</p>
+    </div>
+    <div class="practical-item">
+      <h4>🌐 Internet</h4>
+      <p>Karta SIM lokalna: ok. 10€ za 50GB w roamingu EU lub lokalny pakiet. Do nabycia na lotnisku TGD.</p>
+    </div>
+    <div class="practical-item">
+      <h4>🚗 Parking</h4>
+      <p>Stari Bar: ~2€. Ulcinj: ~2–3€. Kotor: 5–10€ (parking Kamelija tańszy — 3 min pieszo). Virpazar: bezpłatny.</p>
+    </div>
+    <div class="practical-item">
+      <h4>🗣️ Język</h4>
+      <p>Czarnogórski (jak serbski). Angielski — starsze pokolenia rzadziej, turyści OK. Przydatne: <em>Hvala</em> (dziękuję), <em>Dobar dan</em> (dzień dobry), <em>Molim</em> (proszę).</p>
+    </div>
+    <div class="practical-item">
+      <h4>🐟 Ryby w restauracji</h4>
+      <p>Cena podawana za 1 kg <strong>surowej</strong> ryby. Po obróbce zostaje ~200g, ale płacisz za 500–600g wagi surowej. Zapytaj przed zamówieniem: <em>"How much per kilogram?"</em></p>
+    </div>
+    <div class="practical-item">
+      <h4>✈️ Lotnisko TGD → Dobra Voda</h4>
+      <p>~65km, ~1h15min własnym autem przez E65. Nie ma bezpośredniego autobusu do Dobrej Vody.</p>
+    </div>
+    <div class="practical-item">
+      <h4>🩺 Zdrowie</h4>
+      <p>Ubezpieczenie: EKUZ lub prywatne. Apteki w Barze otwarte. Szpital: Bar (ul. Jovana Tomaševića).</p>
+    </div>
+  </div>
+</div>
+
+<!-- WAŻNE -->
+<div class="section">
+  <h2 style="font-size:1.2rem; font-weight:800; margin-bottom:16px;">⚠️ Zapamiętaj przed wyjazdem</h2>
+  <ul class="important-list">
+    <li><strong>Krem UV — Velika Plaža:</strong> 12km plaży, zero cienia. 29°C w sobotę. Weź parasol słoneczny i krem SPF 50 dla dzieci.</li>
+    <li><strong>Buty do wody:</strong> Dobra Voda — plaże kamieniste/żwirowe. Sklep Decathlon lub kup na miejscu ~5€.</li>
+    <li><strong>Repelent na owady dla dzieci:</strong> Reddit potwierdził reakcje skórne na meszki/muszki wieczorami przy brzegu. Koniecznie zabrać.</li>
+    <li><strong>Nie kupuj oliwy przy Stari Bar:</strong> Reddit potwierdził — „ładna butelka, środek to olej słonecznikowy z aromatem". Kupuj tylko w Voli lub na targu Zelena Pijaca.</li>
+    <li><strong>Kotor — wejdź rano:</strong> W sobotę będzie 29°C. Twierdza (1350 stopni) — wejdź przed 10:00, zanim zrobi się nieznośnie gorąco.</li>
+    <li><strong>Rezerwacja restauracji:</strong> Dulcinea 1984 (Ulcinj) i The Sons Eatery (Bar) — dzwoń rano dnia wizyty.</li>
+    <li><strong>Gotówka na Skadar:</strong> Łódki płatne tylko cash. Weź min. 100€ gotówki przed wyjazdem z Dobrej Vody.</li>
+    <li><strong>Wylot 8.06 o 13:25 — wyjedź o 10:30:</strong> Dobra Voda → TGD to ~1h15min. Daj zapas 2h na odprawę.</li>
+    <li><strong>Sprawdź pogodę 1–2 czerwca:</strong> Wtedy prognoza będzie dokładniejsza. Piątek–sobota wyglądają świetnie, środa–czwartek możliwy lekki przelot.</li>
+    <li><strong>Sklepy w niedzielę:</strong> Krótsze godziny — zrób zakupy w sobotę wieczorem przed wyjazdem.</li>
+  </ul>
+</div>
+
+<div style="text-align:center; padding:32px; color:#a0aec0; font-size:0.78rem;">
+  Plan wygenerowany 24.05.2026 · Dane: Open-Meteo + SerpAPI Google Maps + Wikivoyage + Reddit<br>
+  Plik: <code>plan-2026-06-03-dobra-voda-v2.html</code>
+</div>
+
+</div><!-- /container -->
+<script>
+  document.querySelectorAll('a').forEach(function(a) {
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener noreferrer');
+  });
+</script>
+</body>
+</html>
